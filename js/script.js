@@ -59,18 +59,22 @@ window.addEventListener('DOMContentLoaded', function () {
         slickPrev = document.querySelector('.slick-prev'),
         slickNext = document.querySelector('.slick-next');
 
-    slickNext.addEventListener('click', function () {
-        bottomSlider.children[0].classList.remove('card-active');
-        bottomSlider.children[1].classList.add('card-active');
-        clickNext();
-        clickNext();
-    });
-    slickPrev.addEventListener('click', function () {
-        clickPrev();
-        clickPrev();
-        bottomSlider.children[1].classList.remove('card-active');
-        bottomSlider.children[0].classList.add('card-active');
-    });
+    if (!slides.length) {} else {
+        slickNext.addEventListener('click', function () {
+            bottomSlider.children[0].classList.remove('card-active');
+            bottomSlider.children[1].classList.add('card-active');
+            clickNext();
+            clickNext();
+        });
+        slickPrev.addEventListener('click', function () {
+            clickPrev();
+            clickPrev();
+            bottomSlider.children[1].classList.remove('card-active');
+            bottomSlider.children[0].classList.add('card-active');
+        });
+    }
+
+
 
     function clickNext() {
         bottomSlider.appendChild(bottomSlider.firstChild);
@@ -101,5 +105,29 @@ window.addEventListener('DOMContentLoaded', function () {
     });
 
 
+    // Add links slider to module
+
+    // let cardLink = document.querySelectorAll('.showup__content-slider .card');
+
+    // for (let i = 0; i < cardLink.length; i++) {
+
+    //     cardLink[i].href = `./modules.html#`;
+    //     cardLink[i].addEventListener('click', function () {
+
+    //         localStorage.setItem('myKey', i);
+
+    //     });
+    // }
+    // window.onload = function () {
+    //     let slideIndex = localStorage.getItem('myKey');
+    //     if (!slides.length) {
+    //         modules.forEach((item) => item.style.display = 'none');
+    //         modules[slideIndex].style.display = 'block';
+    //     }
+    //     console.log(slideIndex);
+    //     return slideIndex;
+    // };
+
+    // console.log(slideIndex);
 
 });
