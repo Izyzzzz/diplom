@@ -27,6 +27,8 @@ window.addEventListener('DOMContentLoaded', function () {
         showSlides(slideIndex += n);
     }
 
+    // Slider Loan and modules left
+
     for (let i = 1; i <= logo.length; i = i + 2) {
 
         logo[i].addEventListener('click', function () {
@@ -38,6 +40,8 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    //Slider modules bottom
+
     for (let i = 1; i <= next.length; i++) {
 
         next[i - 1].addEventListener('click', function () {
@@ -48,6 +52,15 @@ window.addEventListener('DOMContentLoaded', function () {
             (i == 1) ? showSlides(slideIndex = next.length): plusSlides( -1 );
         });
     }
+
+    // Slider Loan bottom
+
+    let bottomSlider = document.querySelectorAll('.showup__content-slider'),
+        slickPrev = document.querySelector('.slick-prev'),
+        slickNext = document.querySelector('.slick-next');
+
+        
+
 
 
     //Video demonstration
@@ -66,6 +79,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     closeBtn.addEventListener('click', function() {
         overlay.style.display = 'none';
-    });    
+    });
+    
+    
 
 });

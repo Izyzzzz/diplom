@@ -51,6 +51,7 @@
         bottom: 0
         left: 84px
         padding: 40px 0 40px 63px
+        overflow: hidden
         &-title
             color: #ffffff
             font-size: 28px
@@ -61,6 +62,7 @@
         &-slider
             position: relative
             width: 860px
+            display: -webkit-box
             .slick-prev
                 position: absolute
                 bottom: 0px
@@ -107,16 +109,26 @@
                 margin-right: 24px
                 cursor: pointer
                 box-shadow: 0 0px 20px rgba(0,0,0,.5)
-                // &:hover
-                //     padding-top: 32px
-                //     .card
-                //         &__controls
-                //             &-arrow
-                //                 opacity: 1
-                //         &__title
-                //             opacity: 1
-                //         &__description
-                //             opacity: .5
+                &-active
+                    .card
+                        &__controls
+                            &-arrow
+                                opacity: 1
+                        &__title
+                            opacity: 1
+                        &__description
+                            opacity: .5
+
+                &:hover
+                    padding-top: 32px
+                    .card
+                        &__controls
+                            &-arrow
+                                opacity: 1
+                        &__title
+                            opacity: 1
+                        &__description
+                            opacity: .5
                 &__controls
                     width: 100%
                     display: flex
