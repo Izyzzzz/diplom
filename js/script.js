@@ -149,29 +149,31 @@ window.addEventListener('DOMContentLoaded', function () {
         plusLeft = document.querySelector('.officerold .plus'),
         plusRight = document.querySelector('.officernew .plus');
 
-    plusLeft.addEventListener('click', function () {
-        let newDiv = document.createElement('div');
-        newDiv.className = "officer__card-item";
-        newDiv.innerHTML = `<div class="card__counter">0${addItemLeft}</div><div class="card__descr">${addText[addItemLeft - 1]} step with some text and explanation</div>`;
-        officerold.insertBefore(newDiv, officerold.children[addItemLeft]);
-        addItemLeft++;
-        if (addItemLeft === 4) {            
-            let officeroldItem = document.querySelectorAll('.officerold .officer__card-item')[3];
-            officerold.removeChild(officeroldItem);
-        }
-    });
+    if (!slides.length) {} else {
+        plusLeft.addEventListener('click', function () {
+            let newDiv = document.createElement('div');
+            newDiv.className = "officer__card-item";
+            newDiv.innerHTML = `<div class="card__counter">0${addItemLeft}</div><div class="card__descr">${addText[addItemLeft - 1]} step with some text and explanation</div>`;
+            officerold.insertBefore(newDiv, officerold.children[addItemLeft]);
+            addItemLeft++;
+            if (addItemLeft === 4) {
+                let officeroldItem = document.querySelectorAll('.officerold .officer__card-item')[3];
+                officerold.removeChild(officeroldItem);
+            }
+        });
 
-    plusRight.addEventListener('click', function () {
-        let newDiv = document.createElement('div');
-        newDiv.className = "officer__card-item";
-        newDiv.innerHTML = `<div class="card__counter">0${addItemRight}</div><div class="card__descr">${addText[addItemRight - 1]} step with some text and explanation</div>`;
-        officernew.insertBefore(newDiv, officernew.children[addItemRight]);
-        addItemRight++;
-        if (addItemRight === 4) {            
-            let officernewItem = document.querySelectorAll('.officernew .officer__card-item')[3];
-            officernew.removeChild(officernewItem);
-        }
-    });
+        plusRight.addEventListener('click', function () {
+            let newDiv = document.createElement('div');
+            newDiv.className = "officer__card-item";
+            newDiv.innerHTML = `<div class="card__counter">0${addItemRight}</div><div class="card__descr">${addText[addItemRight - 1]} step with some text and explanation</div>`;
+            officernew.insertBefore(newDiv, officernew.children[addItemRight]);
+            addItemRight++;
+            if (addItemRight === 4) {
+                let officernewItem = document.querySelectorAll('.officernew .officer__card-item')[3];
+                officernew.removeChild(officernewItem);
+            }
+        });
+    }
 
 
 });
