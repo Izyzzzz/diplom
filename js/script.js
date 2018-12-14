@@ -122,8 +122,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Slider five page
     let feedSlider = document.querySelector('.feed__slider');
-
-    feedSlider.style.display = '-webkit-box';
+    if (!slides.length) {} else {
+    feedSlider.style.display = '-webkit-box';}
 
     let slickPrevThree = document.querySelector('.button .slick-prev'),
         slickNextThree = document.querySelector('.button .slick-next'),
@@ -269,7 +269,8 @@ window.addEventListener('DOMContentLoaded', function () {
     let input = document.querySelector('#phone'),
         maska = "+1 (___) ___-____";
 
-    input.addEventListener("input", mask);
+        if (!slides.length) {} else {
+        input.addEventListener("input", mask);}
 
     function mask() {
         let i = 0,
@@ -289,16 +290,29 @@ window.addEventListener('DOMContentLoaded', function () {
     //----------------------------------------------------------------
     // Ban cyrillic email
 
-    let inputEmail = document.querySelector('input[type="email"]');
+    let inputEmail = document.querySelectorAll('input[type="email"]');
 
-    inputEmail.addEventListener("input", function () {
-        this.value = inputEmail.value.replace(/[^0-9a-zA-Z-@._]+/gi, "");
-    });
+    for (let i = 0; i < inputEmail.length; i++) {
+        inputEmail[i].addEventListener("input", function () {
+            this.value = inputEmail[i].value.replace(/[^0-9a-zA-Z-@._]+/gi, "");
+        });
+    }
+
+    //----------------------------------------------------------------
+    // Ban letters and signs
+
+    let inputWhen = document.querySelector('input[type="datetime"]');
+    if (!slides.length) {} else {
+    inputWhen.addEventListener("input", function () {
+        this.value = inputWhen.value.replace(/[^0-9-/.]+/gi, "");
+    });}
+
+
 
 
     //------------------------------------------------------------------------
     // Form
-
+    if (!slides.length) {} else {
     let inputAll = document.querySelectorAll('input');
 
     inputAll[0].setAttribute("name", "name");
@@ -322,17 +336,17 @@ window.addEventListener('DOMContentLoaded', function () {
 
     statusMessage.classList.add('status');
 
-    
+
     function sendForm(elem, numElem) {
         elem.addEventListener('submit', function (e) {
             e.preventDefault();
             let formInputTwo = elem.getElementsByTagName('input');
             let flag = false;
-            
-            (formInputTwo[numElem].value.replace(/\D/g, "").length > 10 || numElem === 0) ?  flag = true : flag = false
+
+            (formInputTwo[numElem].value.replace(/\D/g, "").length > 10 || numElem === 0) ? flag = true: flag = false
 
             if (flag) {
-                elem.appendChild(statusMessage);                
+                elem.appendChild(statusMessage);
 
                 let formData = new FormData(elem);
 
@@ -378,6 +392,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     sendForm(form, 3);
     sendForm(formCont, 0);
+}
 
 
 
