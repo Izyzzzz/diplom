@@ -144,10 +144,11 @@ window.addEventListener('DOMContentLoaded', function () {
     // Go to another page
 
     let plusContent = document.querySelector('.plus__content');
-
-    plusContent.addEventListener('click', function () {
-        document.location.replace("./modules.html");
-    });
+    if (!slides.length) {} else {
+        plusContent.addEventListener('click', function () {
+            document.location.replace("./modules.html");
+        });
+    }
 
     //----------------------------------------------------------------------
     // Add links slider to module
@@ -217,7 +218,9 @@ window.addEventListener('DOMContentLoaded', function () {
     // The appearance of the card
 
     let hanson = document.querySelector('.hanson');
-    hanson.style.display = 'none';
+    if (!slides.length) {} else {
+        hanson.style.display = 'none';
+    }
 
     logo[3].addEventListener('click', function () {
         setTimeout(function () {
