@@ -34,9 +34,9 @@ window.addEventListener('DOMContentLoaded', function () {
         logo[i].addEventListener('click', function () {
             (i + 1 == logo.length) ? showSlides(slideIndex = 1): plusSlides(1);
         });
-
+        
         logo[i - 1].addEventListener('click', function () {
-            showSlides(slideIndex = 1);
+            (!slides.length) ? document.location.replace("./index.html") : showSlides(slideIndex = 1);
         });
     }
 
@@ -104,6 +104,15 @@ window.addEventListener('DOMContentLoaded', function () {
         overlay.style.display = 'none';
     });
 
+    // Go to another page
+
+    let plusContent = document.querySelector('.plus__content');
+
+        plusContent.addEventListener('click' , function() {
+            // document.location.href = plusContent.value;
+            document.location.replace("./modules.html");
+        });
+
 
     // Add links slider to module
 
@@ -125,7 +134,7 @@ window.addEventListener('DOMContentLoaded', function () {
     //         modules[slideIndex].style.display = 'block';
     //     }
     //     console.log(slideIndex);
-    //     return slideIndex;
+    //     // return showSlides(slideIndex);
     // };
 
     // console.log(slideIndex);
