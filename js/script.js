@@ -219,10 +219,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let hanson = document.querySelector('.hanson');
     hanson.style.display = 'none';
 
-
-    // let computedStyle = getComputedStyle(document.querySelector('.modules'));
     logo[3].addEventListener('click', function () {
-        // console.log(computedStyle.display);
         setTimeout(function () {
             hanson.style.display = 'block';
         }, 3000);
