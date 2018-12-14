@@ -74,8 +74,6 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-
-
     function clickNext() {
         bottomSlider.appendChild(bottomSlider.firstChild);
     }
@@ -84,8 +82,44 @@ window.addEventListener('DOMContentLoaded', function () {
         bottomSlider.insertBefore(bottomSlider.lastChild, bottomSlider.firstChild);
     }
 
+    // Slider third page
+
+    let slickPrevTwo = document.querySelector('.modules__info-btns .slick-prev'),
+        slickNextTwo = document.querySelector('.modules__info-btns .slick-next'),
+        boxSliderTwo = document.querySelector('.modules__content-slider');
+
+    if (!slides.length) {} else {
+        let timerId = setInterval(function() {
+            boxSliderTwo.children[0].classList.remove('card-active');
+            boxSliderTwo.children[1].classList.add('card-active');
+            clickNextTwo();
+            clickNextTwo();
+          }, 2000);
+        slickNextTwo.addEventListener('click', function () {
+            boxSliderTwo.children[0].classList.remove('card-active');
+            boxSliderTwo.children[1].classList.add('card-active');
+            clickNextTwo();
+            clickNextTwo();
+        });
+        slickPrevTwo.addEventListener('click', function () {
+            clickPrevTwo();
+            clickPrevTwo();
+            boxSliderTwo.children[1].classList.remove('card-active');
+            boxSliderTwo.children[0].classList.add('card-active');
+        });
+    }
+
+    function clickNextTwo() {
+        boxSliderTwo.appendChild(boxSliderTwo.firstChild);
+    }
+
+    function clickPrevTwo() {
+        boxSliderTwo.insertBefore(boxSliderTwo.lastChild, boxSliderTwo.firstChild);
+    }
 
 
+
+    //------------------------------------------------------------------
     //Video demonstration
 
     let play = document.querySelectorAll('.play'),
@@ -104,6 +138,7 @@ window.addEventListener('DOMContentLoaded', function () {
         overlay.style.display = 'none';
     });
 
+    //--------------------------------------------------------------------
     // Go to another page
 
     let plusContent = document.querySelector('.plus__content');
@@ -112,7 +147,7 @@ window.addEventListener('DOMContentLoaded', function () {
         document.location.replace("./modules.html");
     });
 
-
+    //----------------------------------------------------------------------
     // Add links slider to module
 
     // let cardLink = document.querySelectorAll('.showup__content-slider .card');
@@ -139,6 +174,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // console.log(slideIndex);
 
 
+    //---------------------------------------------------------------------------
     //Add card
 
     let addItemLeft = 1,
