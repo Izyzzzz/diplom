@@ -120,6 +120,40 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    // Slider five page
+    let feedSlider = document.querySelector('.feed__slider');
+
+    feedSlider.style.display = '-webkit-box';
+
+    let slickPrevThree = document.querySelector('.button .slick-prev'),
+        slickNextThree = document.querySelector('.button .slick-next'),
+        boxSliderThree = document.querySelector('.feed__slider');
+
+    if (!slides.length) {} else {
+        slickNextThree.addEventListener('click', function () {
+            boxSliderThree.children[0].classList.remove('feed__item-active');
+            boxSliderThree.children[1].classList.add('feed__item-active');
+            clickNextThree();
+            clickNextThree();
+        });
+        slickPrevThree.addEventListener('click', function () {
+            clickPrevThree();
+            clickPrevThree();
+            boxSliderThree.children[1].classList.remove('feed__item-active');
+            boxSliderThree.children[0].classList.add('feed__item-active');
+        });
+    }
+
+    function clickNextThree() {
+        boxSliderThree.appendChild(boxSliderThree.firstChild);
+    }
+
+    function clickPrevThree() {
+        boxSliderThree.insertBefore(boxSliderThree.lastChild, boxSliderThree.firstChild);
+    }
+
+
+
 
     //------------------------------------------------------------------
     //Video demonstration
@@ -295,7 +329,7 @@ window.addEventListener('DOMContentLoaded', function () {
             let formInputTwo = elem.getElementsByTagName('input');
             let flag = false;
             
-            (formInputTwo[numElem].value.replace(/\D/g, "").length > 10 ) ?  flag = true : flag = false
+            (formInputTwo[numElem].value.replace(/\D/g, "").length > 10 || numElem === 0) ?  flag = true : flag = false
 
             if (flag) {
                 elem.appendChild(statusMessage);                
@@ -343,6 +377,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     sendForm(form, 3);
+    sendForm(formCont, 0);
 
 
 

@@ -14,17 +14,13 @@
         width: 100%
         height: 40%
         z-index: -1
-    &__slider
-        width: 100%
-        height: 430px
-        margin-left: 148px
-        margin-top: 40px
-        z-index: 10
+    .button
+        position: relative
         .slick-prev
             z-index: 12
             position: absolute
-            bottom: 0
-            left: 587px
+            bottom: 60%
+            left: 790px
             width: 43px
             height: 43px
             border: 2px solid #EAEAEA
@@ -32,6 +28,14 @@
             background-color: transparent
             cursor: pointer
             margin-right: 12px
+            transition: all 0.2s ease-out
+            &:hover
+                border: 2px solid rgb(255, 255, 255)
+                transition: all 0.2s ease-out
+                svg
+                    width: 18px
+                    height: 18px
+                    transition: all 0.2s ease-out
             svg
                 position: absolute
                 width: 12px
@@ -39,17 +43,26 @@
                 top: 50%
                 left: 50%
                 transform: translateX(-65%) translateY(-50%)
+                transition: all 0.2s ease-out
         .slick-next
             z-index: 12
             position: absolute
-            bottom: 0
-            left: 647px
+            bottom: 60%
+            left: 850px
             width: 43px
             height: 43px
             border: 2px solid #EAEAEA
             border-radius: 100%
             background-color: transparent
             cursor: pointer
+            transition: all 0.2s ease-out
+            &:hover
+                border: 2px solid rgb(255, 255, 255)
+                transition: all 0.2s ease-out
+                svg
+                    width: 18px
+                    height: 18px
+                    transition: all 0.2s ease-out
             svg
                 position: absolute
                 width: 12px
@@ -57,9 +70,16 @@
                 top: 50%
                 left: 50%
                 transform: translateX(-45%) translateY(-50%)
+                transition: all 0.2s ease-out
+    &__slider
+        width: 100%
+        height: 430px
+        margin-left: 148px
+        margin-top: 40px
+        z-index: 10        
     &__item
         width: 241px
-        min-height: 341px
+        height: 341px
         border-radius: 8px 
         background-color: #fff
         padding: 34px 40px 66px 40px
@@ -143,7 +163,7 @@
             margin-top: 26px
         &-active
             width: 555px
-            min-height: 380px
+            min-height: 450px
             border-radius: 8px 
             background-color: #fff
             padding: 32px 40px 50px 40px
