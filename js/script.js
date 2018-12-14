@@ -89,12 +89,14 @@ window.addEventListener('DOMContentLoaded', function () {
         boxSliderTwo = document.querySelector('.modules__content-slider');
 
     if (!slides.length) {} else {
-        let timerId = setInterval(function() {
-            boxSliderTwo.children[0].classList.remove('card-active');
-            boxSliderTwo.children[1].classList.add('card-active');
-            clickNextTwo();
-            clickNextTwo();
-          }, 2000);
+        logo[3].addEventListener('click', function () {
+            let timerId = setInterval(function () {
+                boxSliderTwo.children[0].classList.remove('card-active');
+                boxSliderTwo.children[1].classList.add('card-active');
+                clickNextTwo();
+                clickNextTwo();
+            }, 4000);
+        })
         slickNextTwo.addEventListener('click', function () {
             boxSliderTwo.children[0].classList.remove('card-active');
             boxSliderTwo.children[1].classList.add('card-active');
@@ -210,6 +212,21 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    //------------------------------------------------------------
+    // The appearance of the card
+
+    let hanson = document.querySelector('.hanson');
+    hanson.style.display = 'none';
+
+
+    // let computedStyle = getComputedStyle(document.querySelector('.modules'));
+    logo[3].addEventListener('click', function () {
+        // console.log(computedStyle.display);
+        setTimeout(function () {
+            hanson.style.display = 'block';
+        }, 3000);
+    })
 
 
 });
