@@ -404,11 +404,7 @@ window.addEventListener('DOMContentLoaded', function () {
     
     if (!slides.length) {
     for(let i = 0; i < fileDownload.length; i++) {
-        // let newModuled = document.createElement('a');
-        // fileDownload[i].insertBefore(newModuled, fileDownload[i].children[0]);
         fileDownload[i].setAttribute('download', 'download');
-        // newModuled.setAttribute('href','/Hello.pdf');
-        // newModuled.onclick();
         fileDownload[i].addEventListener('click', function() {
             document.location = '/Hello.zip';
         });
