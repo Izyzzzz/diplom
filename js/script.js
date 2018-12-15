@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         logo[i - 1].addEventListener('click', function () {
             (!slides.length) ? document.location.replace("./index.html"): showSlides(slideIndex = 1);
+            sessionStorage.clear();
         });
     }
 
@@ -113,7 +114,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     sliderBox(boxSliderTwo, slickPrevTwo, slickNextTwo, 'card-active', true, 3);
 
-    
+
     // Slider five page
 
     let feedSlider = document.querySelector('.feed__slider');
@@ -377,6 +378,24 @@ window.addEventListener('DOMContentLoaded', function () {
     // }
 
 
+    //------------------------------------------------------------------------------------------------
+    // Accordion small
+
+    let moduleInfo = document.querySelectorAll('.module__info');
+    if (!slides.length) {
+        let plusContentModuls = document.querySelectorAll('.plus__content');
+        for (let i = 0; i < plusContentModuls.length; i++) {
+            let newModuleText = document.createElement('div');
+            newModuleText.className = "module__info-show-text";
+            newModuleText.innerHTML = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.`;
+            moduleInfo[i].insertBefore(newModuleText, moduleInfo[i].children[5]);
+            
+            plusContentModuls[i].addEventListener('click', function () {
+                newModuleText.classList.toggle("text_out");
+
+            });
+        }
+    }
 
 
 });
