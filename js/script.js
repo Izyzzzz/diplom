@@ -304,7 +304,7 @@ window.addEventListener('DOMContentLoaded', function () {
     let inputWhen = document.querySelector('input[type="datetime"]');
     if (!slides.length) {} else {
     inputWhen.addEventListener("input", function () {
-        this.value = inputWhen.value.replace(/[^0-9-/.]+/gi, "");
+        this.value = inputWhen.value.replace(/[^0-9/.]+/gi, "");
     });}
 
 
