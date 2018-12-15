@@ -400,16 +400,19 @@ window.addEventListener('DOMContentLoaded', function () {
     //-----------------------------------------------------------------------------------------------
     // File download
 
-    // let fileDownload = document.querySelectorAll('.download');
+    let fileDownload = document.querySelectorAll('.download');
     
-    // if (!slides.length) {
-    // for(let i = 0; i < fileDownload.length; i++) {
-    //     let newModuled = document.createElement('a');
-    //     fileDownload[i].insertBefore(newModuled, fileDownload[i].children[0]);
-    //     newModuled.setAttribute('download', 'download');
-    //     newModuled.setAttribute('href','/Hello.pdf');
-    //     // newModuled.onclick();
-    // }}
+    if (!slides.length) {
+    for(let i = 0; i < fileDownload.length; i++) {
+        // let newModuled = document.createElement('a');
+        // fileDownload[i].insertBefore(newModuled, fileDownload[i].children[0]);
+        fileDownload[i].setAttribute('download', 'download');
+        // newModuled.setAttribute('href','/Hello.pdf');
+        // newModuled.onclick();
+        fileDownload[i].addEventListener('click', function() {
+            document.location = '/Hello.zip';
+        });
+    }}
 
 
 });
