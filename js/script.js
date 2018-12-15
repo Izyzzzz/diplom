@@ -33,6 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
         logo[i].addEventListener('click', function () {
             (i + 1 == logo.length) ? showSlides(slideIndex = 1): plusSlides(1);
+            blockVideo();
         });
 
         logo[i - 1].addEventListener('click', function () {
@@ -47,10 +48,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
         next[i - 1].addEventListener('click', function () {
             (i == next.length) ? showSlides(slideIndex = 1): plusSlides(1);
+            blockVideo();
         });
 
         prev[i - 1].addEventListener('click', function () {
             (i == 1) ? showSlides(slideIndex = next.length): plusSlides(-1);
+            blockVideo();
         });
     }
 
@@ -128,25 +131,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     sliderBox(boxSliderThree, slickPrevThree, slickNextThree, 'feed__item-active');
 
-
-    //------------------------------------------------------------------
-    //Video demonstration
-
-    let play = document.querySelectorAll('.play'),
-        overlay = document.querySelector('.overlay'),
-        frameVideo = document.getElementById('frame'),
-        closeBtn = document.querySelector('.close');
-
-    for (let i = 0; i < play.length; i++) {
-        play[i].addEventListener('click', function () {
-            overlay.style.display = 'block';
-            frameVideo.src = play[i].dataset.url;
-        });
-    }
-
-    closeBtn.addEventListener('click', function () {
-        overlay.style.display = 'none';
-    });
+    
 
     //--------------------------------------------------------------------
     // Go to another page
@@ -157,6 +142,7 @@ window.addEventListener('DOMContentLoaded', function () {
             document.location.replace("./modules.html");
         });
     }
+
 
     //----------------------------------------------------------------------
     // Add links slider to module
@@ -219,6 +205,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
     //------------------------------------------------------------
     // The appearance of the card
 
@@ -259,6 +246,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     }
 
+
     //----------------------------------------------------------------
     // Ban cyrillic email
 
@@ -270,6 +258,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
     //----------------------------------------------------------------
     // Ban letters and signs
 
@@ -279,7 +268,6 @@ window.addEventListener('DOMContentLoaded', function () {
             this.value = inputWhen.value.replace(/[^0-9/.]+/gi, "");
         });
     }
-
 
 
 
@@ -368,15 +356,109 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    //------------------------------------------------------------------
+    //Video demonstration
+
+    let play = document.querySelectorAll('.play'),
+        overlay = document.querySelector('.overlay'),
+        closeBtn = document.querySelector('.close'),
+        srcSmoll,
+        moduleVideoItem = document.querySelectorAll('.module__video-item'),
+        lock = document.querySelectorAll('.lock'),
+        lockPlay = document.querySelectorAll('.lock__play');
+
+
+
+    for (let i = 0; i < play.length; i++) {
+        play[i].addEventListener('click', function () {
+            overlay.style.display = 'block';
+            srcSmoll = play[i].dataset.url.slice(30);
+            onYouTubePlayerAPIReady();
+        });
+    }
+
+    for(let i = 0; i < lockPlay.length; i++ ){            
+        lockPlay[i].style.display = 'none';
+    }
+
+    function blockVideo() {
+        if (!slides.length) {
+            for (let i = 1; i < play.length; i = i + 2) {
+                play[i].style.pointerEvents = 'none';
+            }
+        
+        for (let i = 1; i < moduleVideoItem.length; i= i+2) {
+            moduleVideoItem[i].style.opacity = '.4';
+            moduleVideoItem[i].style.filter = 'grayscale(100%)';
+            moduleVideoItem[i].children[1].children[0].classList.add('closed');
+            moduleVideoItem[i].children[1].children[1].classList.add('attention');
+        }
+        for (let i = 0; i < lock.length; i++){            
+            lock[i].style.display = 'block';
+            lockPlay[i].style.display = 'none';
+        }}
+    }
+    blockVideo();
+
+    function unlockVideo() {
+        for (let i = 1; i < play.length; i = i + 2) {
+            play[i].style.pointerEvents = 'unset';
+        }
+        for (let i = 1; i < moduleVideoItem.length; i++) {
+            moduleVideoItem[i].style.opacity = '1';
+            moduleVideoItem[i].style.filter = 'grayscale(0)';
+            moduleVideoItem[i].children[1].children[0].classList.remove('closed');
+            moduleVideoItem[i].children[1].children[1].classList.remove('attention');
+        }
+        for (let i = 0; i < lock.length; i++){            
+            lock[i].style.display = 'none';
+            lockPlay[i].style.display = 'block';
+        }
+    }
+
+
+
+    closeBtn.addEventListener('click', function () {
+        overlay.style.display = 'none';
+        frame.destroy();
+    });
+
+
     //---------------------------------------------------------------------------------------------
-    // Video
+    // Video Youtube player api
 
-    // document.getElementById('myVideo').addEventListener('ended', myHandler, false);
+    let tag = document.createElement('script');
 
-    // function myHandler(e) {
-    //     console.log('Yes');
-    // }
+    tag.src = "https://www.youtube.com/iframe_api";
+    let firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+    let frame;
+
+    function onYouTubePlayerAPIReady() {
+        frame = new YT.Player('frame', {
+            height: '100%',
+            width: '100%',
+            videoId: srcSmoll,
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    //autoplay video
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    function onPlayerStateChange(event) {
+        if (event.data === 0) {
+            unlockVideo();
+        }
+    }
+
+    
 
     //------------------------------------------------------------------------------------------------
     // Accordion small
@@ -401,14 +483,14 @@ window.addEventListener('DOMContentLoaded', function () {
     // File download
 
     let fileDownload = document.querySelectorAll('.download');
-    
-    if (!slides.length) {
-    for(let i = 0; i < fileDownload.length; i++) {
-        fileDownload[i].setAttribute('download', 'download');
-        fileDownload[i].addEventListener('click', function() {
-            document.location = '/Hello.zip';
-        });
-    }}
 
+    if (!slides.length) {
+        for (let i = 0; i < fileDownload.length; i++) {
+            fileDownload[i].setAttribute('download', 'download');
+            fileDownload[i].addEventListener('click', function () {
+                document.location = '/Hello.zip';
+            });
+        }
+    }
 
 });
