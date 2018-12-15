@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', function () {
     function showSlides(n) {
         if (!slides.length) {
             modules.forEach((item) => item.style.display = 'none');
+            console.log(slideIndex);
             modules[slideIndex - 1].style.display = 'block';
         } else {
             slides.forEach((item) => item.style.display = 'none');
@@ -24,7 +25,7 @@ window.addEventListener('DOMContentLoaded', function () {
     }
 
     function plusSlides(n) {
-        showSlides(slideIndex += n);
+        showSlides(Number(slideIndex += n));
     }
 
     // Slider Loan and modules left
@@ -53,106 +54,79 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // Slider Box
+
+    function sliderBox(box, prev, next, classActive, flag, numFlag) {
+        if (!slides.length) {} else {
+            if (flag) {
+                logo[numFlag].addEventListener('click', function () {
+                    let timerId = setInterval(function () {
+                        box.children[0].classList.remove(classActive);
+                        box.children[1].classList.add(classActive);
+                        clickNext();
+                    }, 4000);
+                });
+            }
+            next.addEventListener('click', function () {
+                box.children[0].classList.remove(classActive);
+                box.children[1].classList.add(classActive);
+                clickNext();
+            });
+            prev.addEventListener('click', function () {
+                clickPrev();
+                box.children[1].classList.remove(classActive);
+                box.children[0].classList.add(classActive);
+            });
+        }
+
+        function clickNext() {
+            box.appendChild(box.children[0]);
+        }
+
+        function clickPrev() {
+            box.insertBefore(box.children[box.children.length - 1], box.children[0]);
+        }
+    }
+
     // Slider Loan bottom
+
+    let showupSlider = document.querySelector('.showup__content-slider');
+    if (!slides.length) {} else {
+        showupSlider.style.display = '-webkit-box';
+    }
 
     let bottomSlider = document.querySelector('.showup__content-slider'),
         slickPrev = document.querySelector('.slick-prev'),
         slickNext = document.querySelector('.slick-next');
 
-    if (!slides.length) {} else {
-        slickNext.addEventListener('click', function () {
-            bottomSlider.children[0].classList.remove('card-active');
-            bottomSlider.children[1].classList.add('card-active');
-            clickNext();
-            clickNext();
-        });
-        slickPrev.addEventListener('click', function () {
-            clickPrev();
-            clickPrev();
-            bottomSlider.children[1].classList.remove('card-active');
-            bottomSlider.children[0].classList.add('card-active');
-        });
-    }
-
-    function clickNext() {
-        bottomSlider.appendChild(bottomSlider.firstChild);
-    }
-
-    function clickPrev() {
-        bottomSlider.insertBefore(bottomSlider.lastChild, bottomSlider.firstChild);
-    }
+    sliderBox(bottomSlider, slickPrev, slickNext, 'card-active');
 
     // Slider third page
+
+    let modulesSlider = document.querySelector('.modules__content-slider');
+    if (!slides.length) {} else {
+        modulesSlider.style.display = '-webkit-box';
+    }
 
     let slickPrevTwo = document.querySelector('.modules__info-btns .slick-prev'),
         slickNextTwo = document.querySelector('.modules__info-btns .slick-next'),
         boxSliderTwo = document.querySelector('.modules__content-slider');
 
-    if (!slides.length) {} else {
-        logo[3].addEventListener('click', function () {
-            let timerId = setInterval(function () {
-                boxSliderTwo.children[0].classList.remove('card-active');
-                boxSliderTwo.children[1].classList.add('card-active');
-                clickNextTwo();
-                clickNextTwo();
-            }, 4000);
-        })
-        slickNextTwo.addEventListener('click', function () {
-            boxSliderTwo.children[0].classList.remove('card-active');
-            boxSliderTwo.children[1].classList.add('card-active');
-            clickNextTwo();
-            clickNextTwo();
-        });
-        slickPrevTwo.addEventListener('click', function () {
-            clickPrevTwo();
-            clickPrevTwo();
-            boxSliderTwo.children[1].classList.remove('card-active');
-            boxSliderTwo.children[0].classList.add('card-active');
-        });
-    }
+    sliderBox(boxSliderTwo, slickPrevTwo, slickNextTwo, 'card-active', true, 3);
 
-    function clickNextTwo() {
-        boxSliderTwo.appendChild(boxSliderTwo.firstChild);
-    }
-
-    function clickPrevTwo() {
-        boxSliderTwo.insertBefore(boxSliderTwo.lastChild, boxSliderTwo.firstChild);
-    }
-
-
+    
     // Slider five page
+
     let feedSlider = document.querySelector('.feed__slider');
     if (!slides.length) {} else {
-    feedSlider.style.display = '-webkit-box';}
+        feedSlider.style.display = '-webkit-box';
+    }
 
     let slickPrevThree = document.querySelector('.button .slick-prev'),
         slickNextThree = document.querySelector('.button .slick-next'),
         boxSliderThree = document.querySelector('.feed__slider');
 
-    if (!slides.length) {} else {
-        slickNextThree.addEventListener('click', function () {
-            boxSliderThree.children[0].classList.remove('feed__item-active');
-            boxSliderThree.children[1].classList.add('feed__item-active');
-            clickNextThree();
-            clickNextThree();
-        });
-        slickPrevThree.addEventListener('click', function () {
-            clickPrevThree();
-            clickPrevThree();
-            boxSliderThree.children[1].classList.remove('feed__item-active');
-            boxSliderThree.children[0].classList.add('feed__item-active');
-        });
-    }
-
-    function clickNextThree() {
-        boxSliderThree.appendChild(boxSliderThree.firstChild);
-    }
-
-    function clickPrevThree() {
-        boxSliderThree.insertBefore(boxSliderThree.lastChild, boxSliderThree.firstChild);
-    }
-
-
+    sliderBox(boxSliderThree, slickPrevThree, slickNextThree, 'feed__item-active');
 
 
     //------------------------------------------------------------------
@@ -187,28 +161,25 @@ window.addEventListener('DOMContentLoaded', function () {
     //----------------------------------------------------------------------
     // Add links slider to module
 
-    // let cardLink = document.querySelectorAll('.showup__content-slider .card');
+    let cardLink = document.querySelectorAll('.showup__content-slider .card');
 
-    // for (let i = 0; i < cardLink.length; i++) {
+    for (let i = 0; i < cardLink.length; i++) {
 
-    //     cardLink[i].href = `./modules.html#`;
-    //     cardLink[i].addEventListener('click', function () {
+        cardLink[i].href = `./modules.html`;
+        cardLink[i].addEventListener('click', function () {
 
-    //         localStorage.setItem('myKey', i);
+            sessionStorage.setItem('myKey', i);
 
-    //     });
-    // }
-    // window.onload = function () {
-    //     let slideIndex = localStorage.getItem('myKey');
-    //     if (!slides.length) {
-    //         modules.forEach((item) => item.style.display = 'none');
-    //         modules[slideIndex].style.display = 'block';
-    //     }
-    //     console.log(slideIndex);
-    //     // return showSlides(slideIndex);
-    // };
-
-    // console.log(slideIndex);
+        });
+    }
+    window.onload = function () {
+        slideIndex = Number(sessionStorage.getItem('myKey'));
+        if (!slides.length) {
+            modules.forEach((item) => item.style.display = 'none');
+            modules[slideIndex].style.display = 'block';
+        }
+        slideIndex = slideIndex + 1;
+    };
 
 
     //---------------------------------------------------------------------------
@@ -269,8 +240,9 @@ window.addEventListener('DOMContentLoaded', function () {
     let input = document.querySelector('#phone'),
         maska = "+1 (___) ___-____";
 
-        if (!slides.length) {} else {
-        input.addEventListener("input", mask);}
+    if (!slides.length) {} else {
+        input.addEventListener("input", mask);
+    }
 
     function mask() {
         let i = 0,
@@ -303,9 +275,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let inputWhen = document.querySelector('input[type="datetime"]');
     if (!slides.length) {} else {
-    inputWhen.addEventListener("input", function () {
-        this.value = inputWhen.value.replace(/[^0-9/.]+/gi, "");
-    });}
+        inputWhen.addEventListener("input", function () {
+            this.value = inputWhen.value.replace(/[^0-9/.]+/gi, "");
+        });
+    }
 
 
 
@@ -313,86 +286,96 @@ window.addEventListener('DOMContentLoaded', function () {
     //------------------------------------------------------------------------
     // Form
     if (!slides.length) {} else {
-    let inputAll = document.querySelectorAll('input');
+        let inputAll = document.querySelectorAll('input');
 
-    inputAll[0].setAttribute("name", "name");
-    inputAll[1].setAttribute("name", "profession");
-    inputAll[2].setAttribute("name", "email");
-    inputAll[3].setAttribute("name", "phone");
-    inputAll[4].setAttribute("name", "name");
-    inputAll[5].setAttribute("name", "email");
-    inputAll[6].setAttribute("name", "when");
+        inputAll[0].setAttribute("name", "name");
+        inputAll[1].setAttribute("name", "profession");
+        inputAll[2].setAttribute("name", "email");
+        inputAll[3].setAttribute("name", "phone");
+        inputAll[4].setAttribute("name", "name");
+        inputAll[5].setAttribute("name", "email");
+        inputAll[6].setAttribute("name", "when");
 
-    let message = {
-        loading: 'Загрузка...',
-        success: 'Спасибо! Скоро мы с вами свяжемся!',
-        failure: 'Что-то пошло не так...',
-        phone: 'Слишком мало символов в телефоне.'
-    };
+        let message = {
+            loading: 'Загрузка...',
+            success: 'Спасибо! Скоро мы с вами свяжемся!',
+            failure: 'Что-то пошло не так...',
+            phone: 'Слишком мало символов в телефоне.'
+        };
 
-    let form = document.querySelector('.join__evolution .form'),
-        formCont = document.querySelector('.schedule__form .form'),
-        statusMessage = document.createElement('div');
+        let form = document.querySelector('.join__evolution .form'),
+            formCont = document.querySelector('.schedule__form .form'),
+            statusMessage = document.createElement('div');
 
-    statusMessage.classList.add('status');
+        statusMessage.classList.add('status');
 
 
-    function sendForm(elem, numElem) {
-        elem.addEventListener('submit', function (e) {
-            e.preventDefault();
-            let formInputTwo = elem.getElementsByTagName('input');
-            let flag = false;
+        function sendForm(elem, numElem) {
+            elem.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let formInputTwo = elem.getElementsByTagName('input');
+                let flag = false;
 
-            (formInputTwo[numElem].value.replace(/\D/g, "").length > 10 || numElem === 0) ? flag = true: flag = false
+                (formInputTwo[numElem].value.replace(/\D/g, "").length > 10 || numElem === 0) ? flag = true: flag = false
 
-            if (flag) {
-                elem.appendChild(statusMessage);
+                if (flag) {
+                    elem.appendChild(statusMessage);
 
-                let formData = new FormData(elem);
+                    let formData = new FormData(elem);
 
-                function postData(data) {
-                    return new Promise(function (resolve, reject) {
-                        let request = new XMLHttpRequest();
+                    function postData(data) {
+                        return new Promise(function (resolve, reject) {
+                            let request = new XMLHttpRequest();
 
-                        request.open('POST', 'server.php');
+                            request.open('POST', 'server.php');
 
-                        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-                        request.addEventListener('readystatechange', function () {
-                            if (request.readyState < 4) {
-                                resolve();
-                            } else if (request.readyState === 4 && request.status == 200) {
-                                resolve();
-                            } else {
-                                reject();
-                            }
+                            request.addEventListener('readystatechange', function () {
+                                if (request.readyState < 4) {
+                                    resolve();
+                                } else if (request.readyState === 4 && request.status == 200) {
+                                    resolve();
+                                } else {
+                                    reject();
+                                }
+                            });
+                            request.send(data);
                         });
-                        request.send(data);
-                    });
-                }
-
-                function clearInput() {
-                    for (let i = 0; i < formInputTwo.length; i++) {
-                        formInputTwo[i].value = '';
                     }
+
+                    function clearInput() {
+                        for (let i = 0; i < formInputTwo.length; i++) {
+                            formInputTwo[i].value = '';
+                        }
+                    }
+
+                    postData(formData)
+                        .then(() => statusMessage.innerHTML = message.loading)
+                        .then(() => statusMessage.innerHTML = message.success)
+                        .catch(() => statusMessage.innerHTML = message.failure)
+                        .then(clearInput);
+                } else {
+                    elem.appendChild(statusMessage);
+                    statusMessage.innerHTML = message.phone;
                 }
 
-                postData(formData)
-                    .then(() => statusMessage.innerHTML = message.loading)
-                    .then(() => statusMessage.innerHTML = message.success)
-                    .catch(() => statusMessage.innerHTML = message.failure)
-                    .then(clearInput);
-            } else {
-                elem.appendChild(statusMessage);
-                statusMessage.innerHTML = message.phone;
-            }
+            });
+        }
 
-        });
+        sendForm(form, 3);
+        sendForm(formCont, 0);
     }
 
-    sendForm(form, 3);
-    sendForm(formCont, 0);
-}
+
+    //---------------------------------------------------------------------------------------------
+    // Video
+
+    // document.getElementById('myVideo').addEventListener('ended', myHandler, false);
+
+    // function myHandler(e) {
+    //     console.log('Yes');
+    // }
 
 
 
