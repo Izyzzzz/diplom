@@ -15,7 +15,6 @@ window.addEventListener('DOMContentLoaded', function () {
     function showSlides(n) {
         if (!slides.length) {
             modules.forEach((item) => item.style.display = 'none');
-            console.log(slideIndex);
             modules[slideIndex - 1].style.display = 'block';
         } else {
             slides.forEach((item) => item.style.display = 'none');
