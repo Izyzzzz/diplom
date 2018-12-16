@@ -63,10 +63,11 @@ window.addEventListener('DOMContentLoaded', function () {
         if (!slides.length) {} else {
             if (flag) {
                 logo[numFlag].addEventListener('click', function () {
-                    let timerId = setInterval(function () {
+                    let timerId = setTimeout(function tick() {
                         box.children[0].classList.remove(classActive);
                         box.children[1].classList.add(classActive);
                         clickNext();
+                        timerId = setTimeout(tick, 4000);
                     }, 4000);
                 });
             }
@@ -93,43 +94,48 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Slider Loan bottom
 
-    let showupSlider = document.querySelector('.showup__content-slider');
-    if (!slides.length) {} else {
-        showupSlider.style.display = '-webkit-box';
-    }
-
-    let bottomSlider = document.querySelector('.showup__content-slider'),
+    let showupSlider = document.querySelector('.showup__content-slider'),
+        bottomSlider = document.querySelector('.showup__content-slider'),
         slickPrev = document.querySelector('.slick-prev'),
         slickNext = document.querySelector('.slick-next');
+
+    if (!slides.length) {} else {
+        styleСhangeSlider(showupSlider);
+    }
 
     sliderBox(bottomSlider, slickPrev, slickNext, 'card-active');
 
     // Slider third page
 
-    let modulesSlider = document.querySelector('.modules__content-slider');
-    if (!slides.length) {} else {
-        modulesSlider.style.display = '-webkit-box';
-    }
-
-    let slickPrevTwo = document.querySelector('.modules__info-btns .slick-prev'),
+    let modulesSlider = document.querySelector('.modules__content-slider'),
+        slickPrevTwo = document.querySelector('.modules__info-btns .slick-prev'),
         slickNextTwo = document.querySelector('.modules__info-btns .slick-next'),
         boxSliderTwo = document.querySelector('.modules__content-slider');
+
+    if (!slides.length) {} else {
+        styleСhangeSlider(modulesSlider);
+    }
 
     sliderBox(boxSliderTwo, slickPrevTwo, slickNextTwo, 'card-active', true, 3);
 
 
     // Slider five page
 
-    let feedSlider = document.querySelector('.feed__slider');
-    if (!slides.length) {} else {
-        feedSlider.style.display = '-webkit-box';
-    }
-
-    let slickPrevThree = document.querySelector('.button .slick-prev'),
+    let feedSlider = document.querySelector('.feed__slider'),
+        slickPrevThree = document.querySelector('.button .slick-prev'),
         slickNextThree = document.querySelector('.button .slick-next'),
         boxSliderThree = document.querySelector('.feed__slider');
 
+    if (!slides.length) {} else {
+        styleСhangeSlider(feedSlider);
+    }
+
     sliderBox(boxSliderThree, slickPrevThree, slickNextThree, 'feed__item-active');
+
+
+    function styleСhangeSlider(changeItem) {
+        changeItem.style.display = '-webkit-box';
+    }
 
 
 
@@ -190,28 +196,24 @@ window.addEventListener('DOMContentLoaded', function () {
 
     if (!slides.length) {} else {
         plusLeft.addEventListener('click', function () {
-            let newDiv = document.createElement('div');
-            newDiv.className = "officer__card-item";
-            newDiv.innerHTML = `<div class="card__counter">0${addItemLeft}</div><div class="card__descr">${addText[addItemLeft - 1]} step with some text and explanation</div>`;
-            officerold.insertBefore(newDiv, officerold.children[addItemLeft]);
+            addNewDiv(addItemLeft, officerold, 'officerold');
             addItemLeft++;
-            if (addItemLeft === 4) {
-                let officeroldItem = document.querySelectorAll('.officerold .officer__card-item')[3];
-                officerold.removeChild(officeroldItem);
-            }
         });
 
         plusRight.addEventListener('click', function () {
-            let newDiv = document.createElement('div');
-            newDiv.className = "officer__card-item";
-            newDiv.innerHTML = `<div class="card__counter">0${addItemRight}</div><div class="card__descr">${addText[addItemRight - 1]} step with some text and explanation</div>`;
-            officernew.insertBefore(newDiv, officernew.children[addItemRight]);
+            addNewDiv(addItemRight, officernew, 'officernew');
             addItemRight++;
-            if (addItemRight === 4) {
-                let officernewItem = document.querySelectorAll('.officernew .officer__card-item')[3];
-                officernew.removeChild(officernewItem);
-            }
         });
+    }
+
+    function addNewDiv(addItemLR, officer, classItem) {
+        let newDiv = document.createElement('div');
+        newDiv.className = "officer__card-item";
+        newDiv.innerHTML = `<div class="card__counter">0${addItemLR}</div><div class="card__descr">${addText[addItemLR - 1]} step with some text and explanation</div>`;
+        officer.insertBefore(newDiv, officer.children[addItemLR]);
+        if (addItemLR === 3) {
+            officer.removeChild(document.querySelectorAll(`.${classItem} .officer__card-item`)[3]);
+        }
     }
 
 
@@ -220,14 +222,19 @@ window.addEventListener('DOMContentLoaded', function () {
 
     let hanson = document.querySelector('.hanson');
     if (!slides.length) {} else {
-        hanson.style.display = 'none';
-    }
 
-    logo[3].addEventListener('click', function () {
-        setTimeout(function () {
-            hanson.style.display = 'block';
-        }, 3000);
-    });
+        hanson.style.display = 'none';
+
+        logo[3].addEventListener('click', function () {
+            setTimeout(function () {
+                hanson.style.display = 'block';
+            }, 3000);
+        });
+
+        logo[5].addEventListener('click', function () {
+                hanson.style.display = 'none';
+        });
+    }
 
 
     //------------------------------------------------------------
@@ -272,6 +279,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // Ban letters and signs
 
     let inputWhen = document.querySelector('input[type="datetime"]');
+
     if (!slides.length) {} else {
         inputWhen.addEventListener("input", function () {
             this.value = inputWhen.value.replace(/[^0-9/.]+/gi, "");
@@ -371,10 +379,10 @@ window.addEventListener('DOMContentLoaded', function () {
     let play = document.querySelectorAll('.play'),
         overlay = document.querySelector('.overlay'),
         closeBtn = document.querySelector('.close'),
-        srcSmoll,
         moduleVideoItem = document.querySelectorAll('.module__video-item'),
         lock = document.querySelectorAll('.lock'),
-        lockPlay = document.querySelectorAll('.lock__play');
+        lockPlay = document.querySelectorAll('.lock__play'),
+        srcSmoll;
 
 
 
@@ -408,6 +416,7 @@ window.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+
     blockVideo();
 
     function unlockVideo() {
@@ -425,8 +434,6 @@ window.addEventListener('DOMContentLoaded', function () {
             lockPlay[i].style.display = 'block';
         }
     }
-
-
 
     closeBtn.addEventListener('click', function () {
         overlay.style.display = 'none';
@@ -462,6 +469,7 @@ window.addEventListener('DOMContentLoaded', function () {
         event.target.playVideo();
     }
 
+    // Stop video
     function onPlayerStateChange(event) {
         if (event.data === 0) {
             unlockVideo();
