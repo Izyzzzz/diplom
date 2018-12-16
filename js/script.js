@@ -131,7 +131,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     sliderBox(boxSliderThree, slickPrevThree, slickNextThree, 'feed__item-active');
 
-    
+
 
     //--------------------------------------------------------------------
     // Go to another page
@@ -147,17 +147,26 @@ window.addEventListener('DOMContentLoaded', function () {
     //----------------------------------------------------------------------
     // Add links slider to module
 
-    let cardLink = document.querySelectorAll('.showup__content-slider .card');
+    let cardLink = document.querySelectorAll('.showup__content-slider .card'),
+        moduleLink = document.querySelectorAll('.modules__content-slider .card');
 
-    for (let i = 0; i < cardLink.length; i++) {
+    function addLink(link) {
 
-        cardLink[i].href = `./modules.html`;
-        cardLink[i].addEventListener('click', function () {
+        for (let i = 0; i < link.length; i++) {
 
-            sessionStorage.setItem('myKey', i);
+            link[i].href = `./modules.html`;
+            link[i].addEventListener('click', function () {
 
-        });
+                sessionStorage.setItem('myKey', i);
+
+            });
+        }
     }
+
+    addLink(cardLink);
+    addLink(moduleLink);
+
+
     window.onload = function () {
         slideIndex = Number(sessionStorage.getItem('myKey'));
         if (!slides.length) {
@@ -377,7 +386,7 @@ window.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    for(let i = 0; i < lockPlay.length; i++ ){            
+    for (let i = 0; i < lockPlay.length; i++) {
         lockPlay[i].style.display = 'none';
     }
 
@@ -386,17 +395,18 @@ window.addEventListener('DOMContentLoaded', function () {
             for (let i = 1; i < play.length; i = i + 2) {
                 play[i].style.pointerEvents = 'none';
             }
-        
-        for (let i = 1; i < moduleVideoItem.length; i= i+2) {
-            moduleVideoItem[i].style.opacity = '.4';
-            moduleVideoItem[i].style.filter = 'grayscale(100%)';
-            moduleVideoItem[i].children[1].children[0].classList.add('closed');
-            moduleVideoItem[i].children[1].children[1].classList.add('attention');
+
+            for (let i = 1; i < moduleVideoItem.length; i = i + 2) {
+                moduleVideoItem[i].style.opacity = '.4';
+                moduleVideoItem[i].style.filter = 'grayscale(100%)';
+                moduleVideoItem[i].children[1].children[0].classList.add('closed');
+                moduleVideoItem[i].children[1].children[1].classList.add('attention');
+            }
+            for (let i = 0; i < lock.length; i++) {
+                lock[i].style.display = 'block';
+                lockPlay[i].style.display = 'none';
+            }
         }
-        for (let i = 0; i < lock.length; i++){            
-            lock[i].style.display = 'block';
-            lockPlay[i].style.display = 'none';
-        }}
     }
     blockVideo();
 
@@ -410,7 +420,7 @@ window.addEventListener('DOMContentLoaded', function () {
             moduleVideoItem[i].children[1].children[0].classList.remove('closed');
             moduleVideoItem[i].children[1].children[1].classList.remove('attention');
         }
-        for (let i = 0; i < lock.length; i++){            
+        for (let i = 0; i < lock.length; i++) {
             lock[i].style.display = 'none';
             lockPlay[i].style.display = 'block';
         }
@@ -458,7 +468,7 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    
+
 
     //------------------------------------------------------------------------------------------------
     // Accordion small
